@@ -1,0 +1,26 @@
+{
+  "name": "botchat",
+  "version": "1.0.0",
+  "description": "Application for chatting with a bot",
+  "main": "index.js",
+  "scripts": {
+    "start-bot-chat": "webpack & start http://localhost:8080/ & webpack-dev-server --hot --inline",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "A.Subbota",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/webpack": "^3.8.1",
+    "awesome-typescript-loader": "^3.4.1",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-native": "^0.51.0",
+    "react-native-windows": "^0.50.0",
+    "reactxp": "^0.46.6"
+  }
+}
