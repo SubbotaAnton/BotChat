@@ -1,3 +1,3 @@
-import App = require('./App');
+import { app } from './App';
 
-App.init();
+app.init();

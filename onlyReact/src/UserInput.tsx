@@ -8,8 +8,7 @@ interface UserInputProps {
     onSubmit: (msg: string) => void;
 }
 
-
-class UserInput extends RX.Component<UserInputProps, UserInputState> {
+export class UserInput extends RX.Component<UserInputProps, UserInputState> {
     constructor(props: UserInputProps) {
         super(props);
 
@@ -40,5 +39,3 @@ class UserInput extends RX.Component<UserInputProps, UserInputState> {
         this.setState({ inputValue: "" });
     };
 }
-
-export = UserInput;

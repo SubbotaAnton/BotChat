@@ -6,18 +6,16 @@ interface ChatListProps {
     messages?: Message[];
 }
 
-class ChatList extends RX.Component<ChatListProps, {}> {
+export class ChatList extends RX.Component<ChatListProps, {}> {
     constructor(props: {}) {
         super(props);
     }
     render() {
         const items = this.props.messages.map((item: Message) => {
             return (
-                <RX.View key={item.id}>
-                    <RX.Text>
-                        {item.text} : {item.id}
-                    </RX.Text>
-                </RX.View>
+                <RX.Text key={item.id}>
+                    {item.text} : {item.id}
+                </RX.Text>
             )
         });
 
@@ -28,5 +26,3 @@ class ChatList extends RX.Component<ChatListProps, {}> {
         );
     }
 }
-
-export = ChatList;

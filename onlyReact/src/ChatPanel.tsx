@@ -1,7 +1,8 @@
 import RX = require('reactxp');
 
-import UserInput = require('./UserInput');
-import ChatList = require('./ChatList');
+import { UserInput } from './UserInput';
+import { ChatList } from  './ChatList';
+import { getAIAnswer } from '../../utils/AI';
 
 export interface Message {
     text: string;
@@ -61,14 +62,10 @@ export class ChatPanel extends RX.Component<{}, ChatPanelState> {
                     text,
                     id
                 }, {
-                    text: this.getAIAnswer(text),
+                    text: getAIAnswer(text),
                     id: id + 1
                 }])
             }
         })
-    }
-
-    getAIAnswer(msg: string): string {
-        return `you said: ${msg}!`
     }
 }
