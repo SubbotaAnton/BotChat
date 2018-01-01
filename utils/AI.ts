@@ -12,11 +12,15 @@ const MessageOut = { // answers
     [Messages.Feeling]: ["I am fine, thank you!", "Super!"]
 };
 
-const MessageDefaultOut = "Sorry, I can't understand you";
+const MessageDefaultOut = ["Sorry, I can't understand you", "Could you repeat it, please?"];
 
 function containWord(word: string, msg: string): boolean {
     const pattern = new RegExp(`((.*\\s|,|/.|-|/?)|^)${word}((\\s|,|/.|-|/?.*)|$)`, "i");
     return pattern.test(msg);
+}
+
+function chooseAnswer(answers: string[]):string {
+    return answers[Math.floor(Math.random() * answers.length)]; // return random specific answer
 }
 
 function getAIAnswer(msg: string): string {
@@ -24,14 +28,12 @@ function getAIAnswer(msg: string): string {
         const pattern = (MessageIn as any)[key];
         for (let i = 0; i < pattern.length; i++) {
             if (containWord(pattern[i], msg)) {
-                const answer = (MessageOut as any)[key] || [];
-                return answer[Math.floor(Math.random() * answer.length)]; // return random specific answer
+                return chooseAnswer((MessageOut as any)[key] || []);
             }
-
         }
     }
 
-    return MessageDefaultOut;
+    return chooseAnswer(MessageDefaultOut);
 }
 
 export { getAIAnswer };

@@ -7,6 +7,8 @@ import { getAIAnswer } from '../../utils/AI';
 export interface Message {
     text: string;
     id: number;
+    author: string;
+    timestamp: string;
 }
 
 interface ChatPanelState {
@@ -17,18 +19,6 @@ const _styles = {
     listContainer: RX.Styles.createViewStyle({
         flex: 1,
         alignSelf: 'stretch'
-    }),
-    textInput: RX.Styles.createTextInputStyle({
-        margin: 12,
-        padding: 4,
-        borderColor: '#999',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        height: 30,
-        fontSize: 16
-    }),
-    statusSpacer: RX.Styles.createViewStyle({
-        marginTop: 22
     })
 };
 
@@ -45,27 +35,44 @@ export class ChatPanel extends RX.Component<{}, ChatPanelState> {
 
     render() {
         return (
-            <RX.View style={ [_styles.listContainer, RX.StatusBar.isOverlay() && _styles.statusSpacer] }>
-                <RX.Text>Hello World</RX.Text>
-                <ChatList messages={this.state.messages} />
+            <RX.View style={ _styles.listContainer }>
                 <UserInput onSubmit={this.onSubmit}/>
+                <ChatList messages={this.state.messages} />
             </RX.View>
         )
     }
 
     onSubmit(text: string) {
         this.setState((prevState: ChatPanelState) => {
-            const id = prevState.messages.length;
-
             return {
-                messages: prevState.messages.concat([{
+                messages: [{
                     text,
-                    id
-                }, {
-                    text: getAIAnswer(text),
-                    id: id + 1
-                }])
+                    id: prevState.messages.length,
+                    author: "You",
+                    timestamp: this._getTime()
+                }].concat(prevState.messages)
             }
-        })
+        });
+
+        setTimeout(() => {
+            this.setState((prevState: ChatPanelState) => {
+                return {
+                    messages: [{
+                        text: getAIAnswer(text),
+                        id: prevState.messages.length,
+                        author: "Bot",
+                        timestamp: this._getTime()
+                    }].concat(prevState.messages)
+                }
+            })
+        }, Math.random() * 2000);
+    }
+
+    _getTime():string {
+        const currentTime = new Date();
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
+        return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
     }
 }
