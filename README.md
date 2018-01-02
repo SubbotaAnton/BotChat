@@ -6,3 +6,7 @@ Because of requirements (No Backend, in-memory storage only, 4 hours for test ta
 There are two implementations of this test task:
 - only React, when I use only React View and Main Component to handle logic of childs
 - resub (because reactXP connected with it)
+
+Resub implementation is a full copy of onlyReact implementation, but contain data and some logic into Store
+
+Also there is one small test for AI util
