@@ -1,3 +1,9 @@
+// general idea is to have an array of key words for every type of message
+// for example type Greetings is : ["hello", "hi"]
+// we are looking for entry of this word into sentence, it has to be word, not part of word
+// and for Greetings Bot has also array of possible answers, it's chosen randomly
+// for unknown messages Bot has array of answers too
+
 enum Messages { Greetings, Name, Feeling }
 
 const MessageIn = { // keywords of question
@@ -15,7 +21,7 @@ const MessageOut = { // answers
 const MessageDefaultOut = ["Sorry, I can't understand you", "Could you repeat it, please?"];
 
 function containWord(word: string, msg: string): boolean {
-    const pattern = new RegExp(`((.*\\s|,|/.|-|/?)|^)${word}((\\s|,|/.|-|/?.*)|$)`, "i");
+    const pattern = new RegExp(`((.*\\s|,|\\.|-|\\?|\\!)|^)${word}((\\s|,|\\.|-|\\?|\\!).*|$)`, "i");
     return pattern.test(msg);
 }
 

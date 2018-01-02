@@ -3,7 +3,7 @@
 */
 
 import { StoreBase, AutoSubscribeStore, autoSubscribe } from 'resub';
-import { getAIAnswer } from "../../utils/AI";
+import { getAIAnswer } from "../utils/AI";
 
 export interface Message {
     text: string;

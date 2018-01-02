@@ -3,10 +3,6 @@ import RX = require('reactxp');
 import { UserInput } from  './UserInput';
 import { ChatList } from  './ChatList';
 
-interface ChatPanelState {
-    inputValue?: string;
-}
-
 const _styles = {
     listContainer: RX.Styles.createViewStyle({
         flex: 1,
@@ -14,7 +10,7 @@ const _styles = {
     })
 };
 
-export class ChatPanel extends RX.Component<{}, ChatPanelState> {
+export class ChatPanel extends RX.Component<{}, {}> {
     render() {
         return (
             <RX.View style={ _styles.listContainer }>

@@ -33,7 +33,7 @@ const _styles = {
 
 export class ChatList extends RX.Component<ChatListProps, {}> {
     render() {
-        const items = this.props.messages.map((item: Message, index: number) => {
+        const items = this.props.messages.map((item: Message) => {
             return (
                 <RX.View key={item.id} style={ [_styles.item, item.author  === "Bot" && _styles.itemByBot] }>
                     <RX.Text style={ _styles.author }>{item.author}</RX.Text>

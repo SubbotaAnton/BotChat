@@ -5,16 +5,48 @@
   "main": "index.js",
   "scripts": {
     "start-bot-chat": "webpack & start http://localhost:8080/ & webpack-dev-server --hot --inline",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 20,
+        "functions": 20,
+        "lines": 0,
+        "statements": 40
+      }
+    },
+    "globals": {
+      "window": true,
+      "document": true
+    },
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__test__/.*)\\.test\\.(ts|tsx)$",
+    "mapCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "(node_modules/.*)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   },
   "author": "A.Subbota",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "22.0.0",
     "@types/webpack": "^3.8.1",
     "awesome-typescript-loader": "^3.4.1",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.9.7",
+    "jest": "22.0.4",
+    "jest-cli": "22.0.4",
+    "ts-jest": "22.0.0"
   },
   "dependencies": {
     "react": "^16.2.0",

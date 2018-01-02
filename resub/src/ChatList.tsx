@@ -40,7 +40,7 @@ export class ChatList extends ComponentBase<{}, ChatListState> {
     }
 
     render() {
-        const items = this.state.messages.map((item: Message, index: number) => {
+        const items = this.state.messages.map((item: Message) => {
             return (
                 <RX.View key={item.id} style={ [_styles.item, item.author  === "Bot" && _styles.itemByBot] }>
                     <RX.Text style={ _styles.author }>{item.author}</RX.Text>

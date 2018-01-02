@@ -2,7 +2,7 @@ import RX = require('reactxp');
 
 import { UserInput } from './UserInput';
 import { ChatList } from  './ChatList';
-import { getAIAnswer } from '../../utils/AI';
+import { getAIAnswer } from '../utils/AI';
 
 export interface Message {
     text: string;
