@@ -10,3 +10,5 @@ There are two implementations of this test task:
 Resub implementation is a full copy of onlyReact implementation, but contain data and some logic into Store
 
 Also there is one small test for AI util
+
+https://github.com/SubbotaAnton/BotChat
