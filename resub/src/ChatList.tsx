@@ -1,52 +1,59 @@
 import RX = require('reactxp');
 import { ComponentBase } from 'resub';
-import { VirtualListView, VirtualListViewItemInfo } from 'reactxp-virtuallistview';
 
 import { default as ChatStore, Message } from './ChatStore';
 
-interface MessageListMessageInfo extends VirtualListViewItemInfo {
-    message: Message;
+interface ChatListState {
+    messages?: Message[];
 }
 
-interface MessageListState {
-    messageItems?: MessageListMessageInfo[];
-}
+const _styles = {
+    list: RX.Styles.createViewStyle({
+        flexDirection: 'column',
+        alignSelf: 'stretch',
+        flexGrow: 1,
+        flexShrink: 1
+    }),
+    item: RX.Styles.createViewStyle({
+        padding: 4
+    }),
+    itemByBot: RX.Styles.createTextStyle({
+        backgroundColor: "lightgrey",
+        // for sure it has to be realized in different way in real chat
+        // but just to make visual representation clearer
+    }),
+    author: RX.Styles.createTextStyle({
+        fontSize: 11,
+        color: "blue"
+    }),
+    time: RX.Styles.createTextStyle({
+        fontSize: 11,
+        color: "grey"
+    }),
+};
 
-const _itemHeight = 100;
-
-class ChatList extends ComponentBase<{}, MessageListState> {
-    protected _buildState(props: {}, initialBuild: boolean): MessageListState {
+export class ChatList extends ComponentBase<{}, ChatListState> {
+    protected _buildState(props: {}, initialBuild: boolean): ChatListState {
         return {
-            messageItems: ChatStore.getMessages().map(message => {
-                return {
-                    key: message.id.toString(),
-                    height: _itemHeight,
-                    template: 'image',
-                    message
-                };
-            })
-        };
+            messages: ChatStore.getMessages()
+        }
     }
 
     render() {
-        // If the search is pending, render a spinner.
-        return (
-            <VirtualListView
-                itemList={ this.state.messageItems }
-                renderItem={ this._renderItem }
-            />
-            );
-    }
+        const items = this.state.messages.map((item: Message, index: number) => {
+            return (
+                <RX.View key={item.id} style={ [_styles.item, item.author  === "Bot" && _styles.itemByBot] }>
+                    <RX.Text style={ _styles.author }>{item.author}</RX.Text>
+                    <RX.Text>{item.text}</RX.Text>
+                    <RX.Text style={ _styles.time }>{item.timestamp}</RX.Text>
+                </RX.View>
+            )
+        });
 
-    private _renderItem = (item: MessageListMessageInfo) => {
         return (
-            <RX.View>
-                <RX.Text>
-                    {item.message.text}
-                </RX.Text>
+            <RX.View style={ _styles.list }>
+                {items}
             </RX.View>
         );
     }
 }
-
-export = ChatList;

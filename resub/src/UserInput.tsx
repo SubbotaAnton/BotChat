@@ -5,7 +5,19 @@ interface ChatPanelState {
     inputValue?: string;
 }
 
-class UserInput extends RX.Component<{}, ChatPanelState> {
+const _styles = {
+    textInput: RX.Styles.createTextInputStyle({
+        margin: 12,
+        padding: 4,
+        borderColor: '#999',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        height: 30,
+        fontSize: 16
+    })
+};
+
+export class UserInput extends RX.Component<{}, ChatPanelState> {
     constructor(props: {}) {
         super(props);
 
@@ -22,6 +34,7 @@ class UserInput extends RX.Component<{}, ChatPanelState> {
                     onSubmitEditing={ this.handleSubmitEditing}
                     autoFocus={ true }
                     placeholder={ 'Enter your phrase' }
+                    style={ _styles.textInput }
                 />
         )
     }
@@ -36,5 +49,3 @@ class UserInput extends RX.Component<{}, ChatPanelState> {
         this.setState({ inputValue: "" });
     };
 }
-
-export = UserInput;

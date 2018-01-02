@@ -1,5 +1,6 @@
 import RX = require('reactxp');
-import ChatPanel = require('./ChatPanel');
+
+import { ChatPanel } from "./ChatPanel";
 
 class App {
     init() {
@@ -14,4 +15,6 @@ class App {
     }
 }
 
-export = new App();
+const app = new App();
+
+export { app };
